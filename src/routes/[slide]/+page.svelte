@@ -6,12 +6,17 @@
 </script>
 
 {@render slides[data.slide]()}
-{#if index > 1}
-	<a href="/slide{index - 1}">Previous</a>
-{/if}
-{#if index < length}
-	<a href="/slide{index + 1}">Next</a>
-{/if}
+<div id="button-holder">
+	{#if index > 1}
+		<a href="/slide{index - 1}">Previous</a>
+	{/if}
+	{#if index < length}
+		<a href="/slide{index + 1}">Next</a>
+	{/if}
+</div>
 
 <style>
+	#button-holder {
+		grid-row: 5;
+	}
 </style>
