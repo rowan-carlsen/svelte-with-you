@@ -28,9 +28,4 @@
 		grid-column: 2;
 		justify-self: end;
 	}
-	a {
-		padding: 0.5em;
-		border: 2px solid var(--secondary);
-		border-radius: 0.5em;
-	}
 </style>
