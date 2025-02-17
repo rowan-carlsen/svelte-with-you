@@ -1,13 +1,19 @@
 <script>
 	import { onNavigate } from '$app/navigation';
 	let { children } = $props();
-	onNavigate(() => console.log('navigating', new Date()));
+	let animate = $state(false);
+	onNavigate(() => {
+		animate = true;
+	});
+	function onanimationend() {
+		animate = false;
+	}
 </script>
 
 <svelte:head>
 	<title>Svelte With You!</title>
 </svelte:head>
-<main>
+<main class:animate {onanimationend}>
 	{@render children()}
 </main>
 
@@ -55,8 +61,10 @@
 				#fff 300deg
 			);
 		background-size: 80px 80px;
-		animation: fun 2s infinite;
 		background-position: 0 0;
+	}
+	main.animate::after {
+		animation: fun 2s;
 	}
 	@keyframes fun {
 		to {

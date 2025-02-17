@@ -1,7 +1,3 @@
-<script>
-	//content
-</script>
-
 <img src="rowan-talk.png" width="2500" height="1409" alt="" />
 <a href="/slide1">Begin</a>
 

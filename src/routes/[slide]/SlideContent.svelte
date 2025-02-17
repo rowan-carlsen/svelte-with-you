@@ -1,6 +1,7 @@
 <script module>
 	const slides = { slide1, slide2, slide3, slide4 };
 	export { slides };
+	let hidden = $state(true);
 	const reactExamples = [
 		`const [thing, setThing] = useState(0);
 function onclick() {
@@ -14,12 +15,12 @@ Click Me
 useEffect(() => {
   pingAPI(year)   
 })`,
-		`const [age, setAge] = useState(0);
+		`const [year, setYear] = useState(2014);
 function handleChange(e) {
-    setAge(e.currentTarget.value);
+    setYear(e.currentTarget.value);
 }
 ...
-<input type="number" value={age}
+<input type="number" value={year}
 onChange={handleChange} />`
 	];
 	const svelteExamples = [
@@ -35,9 +36,9 @@ Click Me
 $effect(() => {
   pingAPI(year)
 })`,
-		`let age = $state(0);
+		`let year = $state(2014);
 ...
-<input type="number" bind:value={age} />`
+<input type="number" bind:value={year} />`
 	];
 	const svelte5 = [
 		`//number.svelte.js
@@ -57,30 +58,13 @@ export {number, double};`,
 {@render widget('ping')}
 {@render widget('pong')}`
 	];
-	/*
-	const widgetRef = useRef(null);
-function onclick() {
-    widgetRef.current.focus();
-}
-...
-<div ref={inputRef}>
-    Manipulate me!
-</div>
-
-let widget = $state();
-function onclick() {
-    widget.focus();
-}
-...
-<div bind:this={widget}>
-    Manipulate me!
-</div>
-	*/
 </script>
 
 {#snippet slide1()}
-	<h1>Why Svelte?</h1>
-	<h2>You'll see the difference...</h2>
+	<div class="header-area">
+		<h1>Why Svelte?</h1>
+		<h2>You'll see the difference...</h2>
+	</div>
 	<div class="box">
 		<ul style="grid-column: span 4;">
 			<li>Faster Apps/Pages with less code</li>
@@ -88,16 +72,21 @@ function onclick() {
 			<li>Easy two-way binding for user inputs</li>
 			<li>Decouples JavaScript from markup (unlike JSX)</li>
 		</ul>
-		<img width="887" height="480" src="ob.jpg" alt="" />
-		<img width="887" height="480" src="nh.jpg" alt="" />
-		<pre><code>{reactExamples[0]}</code></pre>
-		<pre><code>{svelteExamples[0]}</code></pre>
+		<img class:hidden width="887" height="480" src="ob.jpg" alt="" />
+		<img class:hidden width="887" height="480" src="nh.jpg" alt="" />
+		<pre class:hidden><code>{reactExamples[0]}</code></pre>
+		<pre class:hidden><code>{svelteExamples[0]}</code></pre>
+		{#if hidden}
+			<button id="show-btn" onclick={() => (hidden = false)}>OK, prove it!</button>
+		{/if}
 	</div>
 {/snippet}
 
 {#snippet slide2()}
-	<h1>Why Svelte?</h1>
-	<h2>You'll see the difference...</h2>
+	<div class="header-area">
+		<h1>Why Svelte?</h1>
+		<h2>You'll see the difference...</h2>
+	</div>
 	<div class="box">
 		<img width="887" height="480" src="ob.jpg" alt="" />
 		<img width="887" height="480" src="nh.jpg" alt="" />
@@ -109,8 +98,10 @@ function onclick() {
 {/snippet}
 
 {#snippet slide3()}
-	<h1>What's New in Svelte 5?</h1>
-	<h2>...and it's getting better, all the time!</h2>
+	<div class="header-area">
+		<h1>What's New in Svelte 5?</h1>
+		<h2>...and it's getting better, all the time!</h2>
+	</div>
 	<div class="box" style="gap: 2em; grid-template-rows: auto 1fr">
 		<ul>
 			<li>"Runes" allow for fine-grained reacivity - with opt-out</li>
@@ -124,8 +115,10 @@ function onclick() {
 {/snippet}
 
 {#snippet slide4()}
-	<h1>OK, how do I start using it?</h1>
-	<h2>There's nothing you and Svelte can't do...</h2>
+	<div class="header-area">
+		<h1>OK, how do I start using it?</h1>
+		<h2>There's nothing you and Svelte can't do...</h2>
+	</div>
 	<div class="box">
 		<ul>
 			<li><code>npx sv create</code></li>
@@ -134,7 +127,8 @@ function onclick() {
 			<li>Can be used with Astro!</li>
 			<li>Out of the box: transitions, crossfade, FLIP, tweening</li>
 		</ul>
-		<pre style="grid-row: span 2; max-height:60vh; grid-column: span 8;">my-project/
+		<pre style="grid-row: span 2; max-height:60vh; grid-column: span 8;">
+my-project/
 ├ src/
 │ ├ lib/
 │ │ ├ server/
@@ -167,14 +161,28 @@ function onclick() {
 	}
 	h1,
 	h2 {
+		margin: 0;
+	}
+	.header-area {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 		grid-column: span 2;
-		margin: 0.5rem 0;
+		background: white;
+		border: 2px solid var(--primary);
+		border-width: 2px 0;
+		padding: 1rem;
 	}
 	ul {
 		grid-row: span 2;
 		grid-column: span 4;
 		font-size: 1.2rem;
 		line-height: 2;
+		background: white;
+		align-self: flex-start;
+		border: 2px solid var(--primary);
+		padding: 0.5em;
+		list-style-position: inside;
 	}
 	.box {
 		grid-column: span 2;
@@ -183,6 +191,8 @@ function onclick() {
 		grid-template-rows: 1fr 1fr;
 		grid-auto-flow: column;
 		gap: 1em 0.5em;
+		padding: 0 0.5rem;
+		position: relative;
 	}
 	pre {
 		grid-column: span 4;
@@ -195,6 +205,7 @@ function onclick() {
 		overflow: auto;
 		max-height: 30vh;
 		align-self: baseline;
+		transition: opacity 0.5s;
 	}
 	img {
 		width: 80%;
@@ -202,6 +213,7 @@ function onclick() {
 		grid-column: span 4;
 		margin: 0 auto;
 		align-self: center;
+		transition: opacity 0.5s;
 	}
 	.horrified {
 		position: relative;
@@ -218,8 +230,25 @@ function onclick() {
 	.horrified::before {
 		content: 'whoops, forgot dependency array...';
 		position: absolute;
-		top: 100%;
+		top: calc(100% + 1px);
 		left: 0;
 		color: red;
+		background-color: white;
+	}
+	.hidden {
+		visibility: hidden;
+		opacity: 0;
+	}
+	#show-btn {
+		cursor: pointer;
+		font-size: inherit;
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		left: 34%;
+		width: max-content;
+		height: max-content;
+		margin: auto;
 	}
 </style>

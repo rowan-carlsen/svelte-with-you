@@ -7,12 +7,8 @@
 
 {@render slides[data.slide]()}
 <div id="button-holder">
-	{#if index > 1}
-		<a id="prev" href="/slide{index - 1}">Previous</a>
-	{/if}
-	{#if index < length}
-		<a id="next" href="/slide{index + 1}">Next</a>
-	{/if}
+	<a id="prev" href={index <= 1 ? '/' : `/slide${index - 1}`}>Previous</a>
+	<a id="next" href={index >= length ? '/sandbox' : `/slide${index + 1}`}>Next</a>
 </div>
 
 <style>
@@ -24,6 +20,7 @@
 		padding: 0.5em;
 		justify-items: baseline;
 	}
+
 	#next {
 		grid-column: 2;
 		justify-self: end;
