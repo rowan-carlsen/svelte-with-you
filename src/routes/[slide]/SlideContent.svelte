@@ -182,7 +182,7 @@ my-project/
 		align-self: flex-start;
 		border: 2px solid var(--primary);
 		padding: 0.5em;
-		list-style-position: inside;
+		padding-left: 2rem;
 	}
 	.box {
 		grid-column: span 2;

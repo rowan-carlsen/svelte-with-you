@@ -6,6 +6,7 @@
 	let even = $derived(count % 2 === 0);
 
 	$effect(async () => {
+		console.log(new Date());
 		const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${count}`);
 		const json = await resp.json();
 		pokemon = json.name;
