@@ -1,4 +1,8 @@
-<script>
+<!-- Use this page to interactively build some reactive content with the audience. The below is an
+example of what you might build together - or you can uncomment it and walk through the logic
+together. -->
+
+<!-- <script>
 	let count = $state(1);
 	let pokemon = $state('');
 	let image = $state();
@@ -6,7 +10,6 @@
 	let even = $derived(count % 2 === 0);
 
 	$effect(async () => {
-		console.log(new Date());
 		const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${count}`);
 		const json = await resp.json();
 		pokemon = json.name;
@@ -29,15 +32,4 @@
 		<br />
 		<img src={image} alt={pokemon} />
 	</div>
-</section>
-
-<style>
-	section {
-		width: 100%;
-		height: 100%;
-		background: white;
-		grid-row: span 4;
-		grid-column: span 2;
-		padding: 0.5rem;
-	}
-</style>
+</section> -->
